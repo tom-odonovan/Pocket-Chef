@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, make_response, sess
 import psycopg2
 from models.queries import sql_select_all, sql_select_one, sql_write
 import bcrypt
+import requests
 
 
 app = Flask(__name__)
@@ -93,6 +94,24 @@ def home():
     session_id = session.get('user_id', 'Unknown')
 
     return render_template('home.html', user=session_id)
+
+
+@app.route('/results', methods=['POST', 'GET'])
+def results():
+    search = request.form['search']
+
+    response = requests.get(
+        f"https://api.spoonacular.com/recipes/complexSearch?query={search}&apiKey=65ad0a272a4d414d8a1be12d6c839a0f"
+    )
+
+    data = response.json()
+    if data['totalResults'] == 0:
+        return render_template('no_results.html', search=search)
+    else:
+        search_results = data['results']
+        print(search_results)
+        return render_template('results.html', search=search, search_results=search_results)
+
 
 # Run the server
 app.run(debug=True)

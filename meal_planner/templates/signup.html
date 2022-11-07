@@ -3,31 +3,32 @@
 
 {% block header %}{% endblock %}
 {% block content %}
-
-<section class="user_signup">
-    <h2>Create an Account</h2>
-    <form method="POST" action="/signup_action">
-        <input type="hidden" name="user_id" value="{{ user_id }}">
-        <input required type="text" placeholder="Given Name" name="given_name">
-        <input required type="text" placeholder="Surname" name="surname">
-        <input required type="text" placeholder="Email address" name="email">
-        <div class="error" id="error1">* This email is already in use. Try another.</div>
-        <input required type="password" placeholder="Password" name="password">
-        <input required type="password" placeholder="Confirm Password" name="password_confirm">
-        <div class="error" id="error2">* Please ensure both passwords match.</div>
-        <input type="submit" class="submit signup" value="Create Account">
-        <p class="signup-link">Already have an account?<a class="link" href="/login">Login</a></p>
-        <p>Or</p>
-        
-        <p>Continue as<a class="link" href="/home">guest</a></p>
-    </form>
-</section>
-
+<main class="user_signup" id="main">
+    <section class="signup_container">
+        <h2>Create an Account</h2>
+        <form method="POST" action="/signup_action">
+            <input type="hidden" name="user_id" value="{{ user_id }}">
+            <input required type="text" placeholder="Given Name" name="given_name">
+            <input required type="text" placeholder="Surname" name="surname">
+            <input required type="text" placeholder="Email address" name="email">
+            <div class="error" id="error1">* This email is already in use. Try another.</div>
+            <input required type="password" placeholder="Password" name="password">
+            <input required type="password" placeholder="Confirm Password" name="password_confirm">
+            <div class="error" id="error2">* Please ensure both passwords match.</div>
+            <input type="submit" class="submit signup" value="Create Account">
+            <p class="signup-link">Already have an account?<a class="link" href="/login">Login</a></p>
+            <p>Or</p>
+            
+            <p>Continue as<a class="link" href="/home">guest</a></p>
+        </form>
+    </section>
+</main>
 {% endblock %}
 {% block script %}
 <script>
     const main = document.getElementById('main')
     rand = Math.ceil(Math.random() * 4)
+    main.style.backgroundColor = 'rgba(0, 0, 0, 0.4)'
     main.style.backgroundImage = `url(/static/imgs/bg_${rand}.jpeg`
 
     if ('{{ existing }}' == 'True') {

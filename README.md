@@ -20,3 +20,9 @@ Project 2 for General Assembly SEI
     - Generate session id for each user ✅
     - Display user id ✅
     - Allow users to logout ✅
+
+### Create Basic Recipe Search
+
+- Create search bar ✅
+- Allow users to search for recipes using the spoonacular API ✅
+- Display search results in a list ✅

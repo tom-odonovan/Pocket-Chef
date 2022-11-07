@@ -3,26 +3,27 @@
 
 {% block header %}{% endblock %}
 {% block content %}
-
-<section class="user_login">
-    <h2>Login</h2>
-    <form method="POST" action="/login_action">
-        <input type="hidden" name="user_id" value="{{ user_id }}">
-        <input required type="text" placeholder="Email address" name="username">
-        <input required type="password" placeholder="Password" name="password">
-        <div class="error" id="error3">* Email or password is incorrect</div>
-        <input type="submit" class="submit login" value="Login">
-        <p class="signup-text">Don't have an account?<a class="link" href="/signup">Sign up</a></p>
-        <p>Or</p>
-        <p>Continue as<a class="link" href="/home">guest</a></p>
-    </form>
-</section>
-
+<main class="user_login" id="main">
+    <section class="login_container">
+        <h2>Login</h2>
+        <form method="POST" action="/login_action">
+            <input type="hidden" name="user_id" value="{{ user_id }}">
+            <input required type="text" placeholder="Email address" name="username">
+            <input required type="password" placeholder="Password" name="password">
+            <div class="error" id="error3">* Email or password is incorrect</div>
+            <input type="submit" class="submit login" value="Login">
+            <p class="signup-text">Don't have an account?<a class="link" href="/signup">Sign up</a></p>
+            <p>Or</p>
+            <p>Continue as<a class="link" href="/home">guest</a></p>
+        </form>
+    </section>
+</main>
 {% endblock %}
 {% block script %}
 <script>
     const main = document.getElementById('main')
     rand = Math.ceil(Math.random() * 4)
+    main.style.backgroundColor = 'rgba(0, 0, 0, 0.4)'
     main.style.backgroundImage = `url(/static/imgs/bg_${rand}.jpeg`
 
     if ('{{ error }}' == 'True') {

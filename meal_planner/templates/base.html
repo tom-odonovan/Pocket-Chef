@@ -40,10 +40,9 @@
         </nav>
     </header>
     {% endblock %}
-    <main id="main">
-        {% block content %}
-        {% endblock %}
-    </main>
+
+    {% block content %}{% endblock %}
+
     {% block script %}
     <script>
         const user_settings = document.getElementById('user_settings')

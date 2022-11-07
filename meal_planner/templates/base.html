@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} - Meal Planner</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    {% endblock %}
+</head>
+
+<body>
+    {% block header %}
+    <header class="page-header">
+        {% block login %}
+        <div class="user_id_container">
+            {% if user %}
+            <div>
+                <select id="user_settings">
+                    <option value="" selected disabled>{{ user }}</option>
+                    <option value="/">Settings</option>
+                    <option value="/">Switch User</option>
+                    <option value="/">Logout</option>
+                </select>
+            </div>
+            {% else %}
+            <a class="submit login-out" href="/">Login</a>
+            {% endif %}
+        </div>
+        {% endblock %}
+        <h1>Meal Planner</h1>
+        <nav class="nav">
+            <ul>
+                <li><a href="/">DASHBOARD</a></li>
+                <li><a href="#">PLANNER</a></li>
+                <li><a href="#">RECIPIES</a></li>
+                <li><a href="# ">SHOPPING LIST</a></li>
+            </ul>
+        </nav>
+    </header>
+    {% endblock %}
+    <main id="main">
+        {% block content %}
+        {% endblock %}
+    </main>
+    {% block script %}{% endblock %}
+</body>
+</html>

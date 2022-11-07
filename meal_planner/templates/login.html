@@ -6,7 +6,7 @@
 
 <section class="user_login">
     <h2>Login</h2>
-    <form method="POST">
+    <form method="POST" action="/login_action">
         <input type="hidden" name="user_id" value="{{ user_id }}">
         <input required type="text" placeholder="Email address" name="username">
         <input required type="password" placeholder="Password" name="password">
@@ -14,7 +14,7 @@
         <input type="submit" class="submit login" value="Login">
         <p class="signup-text">Don't have an account?<a class="link" href="/signup">Sign up</a></p>
         <p>Or</p>
-        <p>Continue as<a class="link" href="/">guest</a></p>
+        <p>Continue as<a class="link" href="/home">guest</a></p>
     </form>
 </section>
 
@@ -24,5 +24,10 @@
     const main = document.getElementById('main')
     rand = Math.ceil(Math.random() * 4)
     main.style.backgroundImage = `url(/static/imgs/bg_${rand}.jpeg`
+
+    if ('{{ error }}' == 'True') {
+        let error = document.getElementById('error3')
+        error.style.opacity = '1'
+    }
 </script>
 {% endblock %}

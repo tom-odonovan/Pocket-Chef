@@ -20,13 +20,12 @@
             <div>
                 <select id="user_settings">
                     <option value="" selected disabled>{{ user }}</option>
-                    <option value="/">Settings</option>
-                    <option value="/">Switch User</option>
-                    <option value="/">Logout</option>
+                    <option value="/login">Switch User</option>
+                    <option value="/logout">Logout</option>
                 </select>
             </div>
             {% else %}
-            <a class="submit login-out" href="/">Login</a>
+            <a class="submit login-out" href="/login">Login</a>
             {% endif %}
         </div>
         {% endblock %}
@@ -45,6 +44,15 @@
         {% block content %}
         {% endblock %}
     </main>
-    {% block script %}{% endblock %}
+    {% block script %}
+    <script>
+        const user_settings = document.getElementById('user_settings')
+        user_settings.onchange = function () {
+            if (confirm(`Are you sure you want to log out?`)) {
+                window.location = this.value;
+            }
+        }
+    </script>
+    {% endblock %}
 </body>
 </html>

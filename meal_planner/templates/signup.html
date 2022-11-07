@@ -6,10 +6,10 @@
 
 <section class="user_signup">
     <h2>Create an Account</h2>
-    <form method="POST">
+    <form method="POST" action="/signup_action">
         <input type="hidden" name="user_id" value="{{ user_id }}">
-        <input required type="text" placeholder="Given Name" name="name">
-        <input required type="text" placeholder="Surname" name="name">
+        <input required type="text" placeholder="Given Name" name="given_name">
+        <input required type="text" placeholder="Surname" name="surname">
         <input required type="text" placeholder="Email address" name="email">
         <div class="error" id="error1">* This email is already in use. Try another.</div>
         <input required type="password" placeholder="Password" name="password">
@@ -19,7 +19,7 @@
         <p class="signup-link">Already have an account?<a class="link" href="/login">Login</a></p>
         <p>Or</p>
         
-        <p>Continue as<a class="link" href="/">guest</a></p>
+        <p>Continue as<a class="link" href="/home">guest</a></p>
     </form>
 </section>
 
@@ -29,5 +29,14 @@
     const main = document.getElementById('main')
     rand = Math.ceil(Math.random() * 4)
     main.style.backgroundImage = `url(/static/imgs/bg_${rand}.jpeg`
+
+    if ('{{ existing }}' == 'True') {
+        let existing_user_error = document.getElementById('error1')
+        existing_user_error.style.opacity = '1'
+    }
+    if ('{{ password_match }}' == 'False') {
+        let password_match_error = document.getElementById('error2')
+        password_match_error.style.opacity = '1'
+    }
 </script>
 {% endblock %}

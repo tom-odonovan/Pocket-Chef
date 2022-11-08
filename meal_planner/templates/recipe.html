@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Recipe{% endblock %}
+
+{% block content %}
+<main class="results">
+
+    <div class="search-container">
+        <form class="search-bar" method="POST" action="/results">
+            <input class="search-input" type="text" placeholder="Search recipes" name="search">
+            <input class="submit search-button" type="submit" value="Search">
+        </form>
+    </div>
+
+    <div class="recipe_container">
+        <h1></h1>
+    </div>
+</main>
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script>
+    recipe_dict = '{{ recipe_dict | tojson }}'
+    recipe_dict = JSON.parse(recipe_dict)
+    console.log(typeof(recipe_dict))
+</script>
+{% endblock %}

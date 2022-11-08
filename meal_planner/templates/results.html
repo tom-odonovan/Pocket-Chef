@@ -17,10 +17,12 @@
 {% endblock %}
 
 {% block script %}
+{{ super() }}
 <script>
     let search_results = '{{ search_results | tojson }}'
     search_results = JSON.parse(search_results)
     console.log(search_results)
+
 
     let results_container = document.getElementById('results_container')
         for (result in search_results) {
@@ -32,15 +34,15 @@
             thumbnail.className = 'thumbnail'
             thumbnail.setAttribute('src', `${search_results[result]['image']}`)
             result_container.appendChild(thumbnail)
-            //console.log(search_results[result]['Poster'])
 
-            let name = document.createElement('a')
+            let recipe = document.createElement('a')
             let title = search_results[result]['title']
-            name.innerText = title
-            // name.setAttribute('method', 'POST')
-            name.setAttribute('href', `#`)
-            // name.setAttribute('value', search_results[result]['Title'])
-            result_container.appendChild(name)
+            recipe.innerText = title
+            recipe.setAttribute('method', 'POST')
+            let recipe_id = search_results[result]['id']
+            recipe.setAttribute('href', `/recipe?id=${recipe_id}`)
+            recipe.setAttribute('value', recipe_id)
+            result_container.appendChild(recipe)
         }
 </script>
 {% endblock %}

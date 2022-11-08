@@ -216,7 +216,8 @@ form select {
 /* ----------------------// RESULTS //-------------------- */
 
 .results {
-    margin: 0 300px;
+    width: 800px;
+    margin: 0 auto;
 }
 .no_result {
     text-align: center;

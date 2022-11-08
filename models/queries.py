@@ -1,6 +1,10 @@
 import psycopg2
 
-conn = psycopg2.connect('dbname=meal_planner')
+import os
+
+DB_URL = os.environ.get('DATABASE_URL', 'dbname=meal_planner')
+
+conn = psycopg2.connect(DB_URL)
 
 
 def sql_select_all(query, params=[]):

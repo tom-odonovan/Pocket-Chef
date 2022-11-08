@@ -137,14 +137,14 @@ def results():
 def recipe():
     session_id = session.get('user_id', 'Unknown')
     recipe_id = request.args.get('id')
-    response = requests.get(
-        f"https://api.spoonacular.com/recipes/{recipe_id}/information?apiKey=55b5b8694b354c009c8b2c8939e1683b"
-    )
-    data = response.json()
-    recipe_dict = dict(data)
-    print(recipe_dict)
+    # response = requests.get(
+    #     f"https://api.spoonacular.com/recipes/{recipe_id}/information?apiKey=55b5b8694b354c009c8b2c8939e1683b"
+    # )
+    # data = response.json()
+    # recipe_dict = dict(data)
+    # print(recipe_dict)
 
-    return render_template('recipe.html', user=session_id, recipe_dict=recipe_dict)
+    return render_template('recipe.html', user=session_id)
 
 
 

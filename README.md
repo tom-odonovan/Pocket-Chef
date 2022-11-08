@@ -25,4 +25,4 @@ Project 2 for General Assembly SEI
 
 - Create search bar ✅
 - Allow users to search for recipes using the spoonacular API ✅
-- Display search results in a list ✅
+- Render search results in a list ✅

@@ -10,18 +10,110 @@
             <input class="submit search-button" type="submit" value="Search">
         </form>
     </div>
-
+    
     <div class="recipe_container">
-        <h1></h1>
+        <img src="{{ recipe_dict['image'] }}">
+        <h1 class="title">{{ recipe_dict['title'] }}</h1>
+        <p class="prepTime"><strong>PREP </strong>{{ recipe_dict['prepTime'] }} mins</p>
+        <p id="summary"></p>
+        {% for diet in recipe_dict['diets'] %}
+        <div class="diets">{{ diet }}</div>
+        {% endfor %}
+        <div class="servings">
+            <strong>Serves </strong>
+            <input id="servings" type="number" min="1">
+        </div>
+        <div id="ingredients_cont">
+            <h3>INGREDIENTS</h3>
+            
+        </div>
+        <div id="method_cont">
+            <h3>METHOD</h3>
+        </div>
+        <button>Add to favourites ♥</button>
+        <button>Add to shopping list</button>
     </div>
+
 </main>
 {% endblock %}
 
 {% block script %}
 {{ super() }}
 <script>
-    recipe_dict = '{{ recipe_dict | tojson }}'
+    let multuplier = 1
+
+    let recipe_dict = '{{ recipe_dict | tojson }}'
     recipe_dict = JSON.parse(recipe_dict)
-    console.log(typeof(recipe_dict))
+    console.log(recipe_dict)
+
+    summaryJson = '{{ summary | tojson }}'
+    summaryText = summaryJson.slice(1, -1)
+    summaryText = summaryText.replace(/<[^>]+>/g, "")
+    summaryText = summaryText.replace(/spoonacular/g, "")
+    let summary = document.getElementById('summary')
+    summary.innerText = summaryText
+
+    let servings_toggle = document.getElementById('servings')
+    let servings = recipe_dict['servings']
+    servings_toggle.setAttribute('value', servings)
+    servings_toggle.onchange = function () {
+        multuplier = servings_toggle.value / recipe_dict['servings']
+        console.log(multuplier)
+        let amounts = document.getElementsByClassName('quantity')
+        for (value in amounts) {
+            console.log(amounts[value])
+            amounts[value].innerHTML = parseInt(amounts[value].innerHTML * multuplier)
+        }
+    }
+
+
+    let ingredients_cont = document.getElementById('ingredients_cont')
+    let ingredients = recipe_dict['ingredients']
+    for (let item in ingredients) {
+        let ingredient = document.createElement('div')
+        ingredient.className = 'ingredient'
+        ingredients_cont.appendChild(ingredient)
+
+        let quantity = document.createElement('span')
+        quantity.className = 'quantity'
+        let value = (ingredients[item]['measures']['metric']['amount']) * multuplier
+        quantity.innerText = parseInt(value)
+        ingredient.appendChild(quantity)
+
+        let unit = document.createElement('span')
+        unit.className = 'units'
+        unit.innerText = ingredients[item]['measures']['metric']['unitLong']
+        ingredient.appendChild(unit)
+
+        let name = document.createElement('span')
+        name.className = 'name'
+        name.innerText = ingredients[item]['originalName']
+        ingredient.appendChild(name)
+    }
+    
+    
+
+    
+
+    let method_cont = document.getElementById('method_cont')
+    let steps = document.createElement('div')
+    steps.innerHTML = recipe_dict['steps']
+    method_cont.appendChild(steps)
+
+   
 </script>
 {% endblock %}
+
+<!-- 
+
+For serving adjustments:
+
+quant       =  {{ item['measures']['metric']['amount'] }}
+units       =  {{ item['measures']['metric']['unitLong'] }}
+ingredient  =  {{ item['originalName'] }}
+
+value = value x ( new toggle value / previous toggle value )
+
+How can I get the previous toggle value ??
+
+-->

@@ -128,6 +128,7 @@ def results():
         return render_template('no_results.html', user=session_id, search=search)
     else:
         search_results = data['results']
+        # print(data)
         # print(search_results)
         return render_template('results.html', user=session_id, search=search, search_results=search_results)
 
@@ -137,14 +138,47 @@ def results():
 def recipe():
     session_id = session.get('user_id', 'Unknown')
     recipe_id = request.args.get('id')
-    # response = requests.get(
-    #     f"https://api.spoonacular.com/recipes/{recipe_id}/information?apiKey=55b5b8694b354c009c8b2c8939e1683b"
-    # )
-    # data = response.json()
-    # recipe_dict = dict(data)
-    # print(recipe_dict)
+    response = requests.get(
+        f"https://api.spoonacular.com/recipes/{recipe_id}/information?apiKey=55b5b8694b354c009c8b2c8939e1683b"
+    )
+    data = response.json()
+    
+    
 
-    return render_template('recipe.html', user=session_id)
+    # After much frustration I decided to create my own dictionary for each recipe as the JSON data was experiencing formatting issues
+
+    id = data['id']
+    title = data['title']
+    image = data['image']
+    servings = data['servings']
+    prepTime = data['readyInMinutes']
+    extendedIngredients = data['extendedIngredients']
+    steps = data['instructions']
+    diets = data['diets']
+    summary = data['summary']
+    
+
+    recipe_dict = {
+        'id': id,
+        'title': title,
+        'image': image,
+        'servings': servings,
+        'prepTime': prepTime,
+        'ingredients': extendedIngredients,
+        'steps': steps,
+        'diets': diets
+    }
+
+    print(summary)
+
+    # keys = ['id', 'name', 'measures']
+    # values = []
+    # for item in extendedIngredients:
+    #     values.append(item[])
+    #     ingredients.append(item['originalName'])
+    
+
+    return render_template('recipe.html', user=session_id, recipe_dict=recipe_dict, summary=summary)
 
 
 

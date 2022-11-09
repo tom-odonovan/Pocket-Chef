@@ -149,11 +149,21 @@ form select {
 .login,
 .signup {
     display: block;
-    width: 150px;
+    width: 200px;
     padding: 10px 0;
     margin: 50px auto;
     font-size: 14px;
     text-decoration: none;
+}
+.login:hover,
+.signup:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    color: navy;
+    font-weight: bold;
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: 0.1s;
 }
 
 .link {
@@ -222,4 +232,46 @@ form select {
 .no_result {
     text-align: center;
     margin: 0 auto;
+}
+
+
+/* ----------------------// RECIPE //-------------------- */
+
+.recipe_container img {
+    width: 600px;
+}
+
+#method_cont ol>li{
+    padding: 10px;
+} 
+
+/* #method_cont ol>li:before{
+    position: relative;
+    top: 2px;
+    left: -30px;
+    width: 28px;
+    height: 28px;
+    font-size: 17px;
+    line-height: 27px;
+    text-align: center;
+    color: #fff;
+    background-color: #e76182;
+    border-radius: 50%;
+    content: counter(li);
+    counter-increment: li;
+} */
+.recipe_container .servings {
+    margin: 30px 0;
+}
+.recipe_container #servings {
+    width: 50px;
+    padding: 5px;
+}
+
+.ingredient span {
+    display: inline-block;
+    padding: 5px 0.3em 5px 0;
+}
+.ingredient .quantity {
+    font-weight: bold;
 }

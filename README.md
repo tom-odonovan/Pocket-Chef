@@ -26,3 +26,9 @@ Project 2 for General Assembly SEI
 - Create search bar ✅
 - Allow users to search for recipes using the spoonacular API ✅
 - Render search results in a list ✅
+
+### Display Recipe Information on a Separate Page 
+
+- Create a new route to display recipe info ✅
+- When the user clicks a search result, they should be directed to the recipe page ✅
+- Render recipe info in HTML ✅

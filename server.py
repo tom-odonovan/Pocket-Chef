@@ -12,7 +12,7 @@ app.config['SECRET_KEY'] = 'secret_key'
 
 @app.route('/')
 def index():
-    return render_template('signup.html')
+    return render_template('login.html')
 
 
 @app.route('/signup')
@@ -110,18 +110,6 @@ def results():
     response = requests.get(
         f"https://api.spoonacular.com/recipes/complexSearch?query={search}&apiKey=55b5b8694b354c009c8b2c8939e1683b"
     ) 
-    # response_2 = requests.get(
-    #     f"https://api.spoonacular.com/recipes/informationBulk?ids=75523&apiKey=55b5b8694b354c009c8b2c8939e1683b"
-    # )
-    # data_2 = response_2.json()
-    # print(data_2)
-
-    # response_2 = requests.get(
-    #     f"https://api.spoonacular.com/recipes/{632573}/information?apiKey=55b5b8694b354c009c8b2c8939e1683b"
-    # )
-    # data_2 = response_2.json()
-    # recipe_dict = dict(data_2)
-    # print(recipe_dict)
 
     data = response.json()
 
@@ -165,16 +153,40 @@ def recipe(recipe_id):
 def add_favourite(recipe_id):
     session_id = session.get('user_id', 'Unknown')
     user_id = sql_select_one('SELECT id FROM users WHERE given_name=%s', [session_id])
+    # print(user_id[0])
+    # print(recipe_id)
 
-    sql_write('INSERT INTO favourites (user_id, recipe_id) VALUES (%s, %s)', [user_id, recipe_id])
+    sql_write('INSERT INTO favourites (user_id, recipe_id) VALUES (%s, %s)', [user_id[0], recipe_id])
 
     return redirect(f'/recipe/{recipe_id}')
 
-@app.route('/favourite_recipes')
+@app.route('/saved_recipes')
 def favourite_recipes():
     session_id = session.get('user_id', 'Unknown')
+    user_id = sql_select_one('SELECT id FROM users WHERE given_name=%s', [session_id])
+    print(user_id[0])
+    result = sql_select_all('SELECT recipe_id FROM favourites WHERE user_id=%s', [user_id[0]])
+    fav_recipes_ids = []
+    for recipe in result:
+        fav_recipes_ids.append(recipe)
+    print(fav_recipes_ids)
+    fav_recipes = []
+    for id in fav_recipes_ids:
+        response = requests.get(
+            f"https://api.spoonacular.com/recipes/{id[0]}/information?apiKey=55b5b8694b354c009c8b2c8939e1683b"
+        )
+        data = response.json()
+        recipe_dict = {
+            'id': data['id'],
+            'title': data['title'],
+            'image': data['image'],
+            'prepTime': data['readyInMinutes'],
+            'diets': data['diets']
+        }
+        fav_recipes.append(recipe_dict)
+        print(fav_recipes)
 
-    return render_template('home.html', user=session_id)
+    return render_template('saved_recipes.html', user=session_id, fav_recipes=fav_recipes)
 
 
 # Run the server

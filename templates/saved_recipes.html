@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Favourite Recipes{% endblock %}
+
+{% block content %}
+<main class="favourite_recipes">
+    <h1>Favourite Recipes</h1>
+    <div class="flex_cont">
+        {% for recipe in fav_recipes %}
+        <a class="saved_recipe_cont" method="POST" href="/recipe/{{ recipe['id'] }}">
+            <img src="{{ recipe['image'] }}">
+            <h4>{{ recipe['title'] }}</h4>
+            <p>{{ recipe['prepTime'] }} MIN</p>
+            <div class="diets">
+                {% if 'gluten free' in recipe['diets'] %}
+                <div>GF</div>
+                {% endif %}
+                {% if 'dairy free' in recipe['diets'] %}
+                <div>DF</div>
+                {% endif %}
+                {% if 'vegan' in recipe['diets'] %}
+                <div>V</div>
+                {% endif %}
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script>
+let fav_recipes = '{{ fav_recipes | tojson }}'
+fav_recipes = JSON.parse(fav_recipes)
+console.log(fav_recipes)
+</script>
+{% endblock %}

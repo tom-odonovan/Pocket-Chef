@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}{{ user }}{% endblock %}
+
+{% block content %}
+<h1>{{ user }}</h1>
+<p> Adjust your preferences</p>
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script>
+    user_info = '{{ user_info | tojson }}'
+    user_info = JSON.parse(user_info)
+    console.log(user_info)
+</script>
+{% endblock %}

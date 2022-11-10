@@ -364,6 +364,9 @@ form select {
 
 /* ----------------------// SAVED RECIPES //-------------------- */
 
+.favourite_recipes {
+    width: 800px;
+}
 .flex_cont {
     display: flex;
     flex-wrap: wrap;

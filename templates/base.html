@@ -29,13 +29,17 @@
             {% endif %}
         </div>
         {% endblock %}
-        
+
         <h1>Meal Planner</h1>
         <nav class="nav">
             <ul>
                 <li><a href="/home">HOME</a></li>
                 <li><a href="#">PLANNER</a></li>
+                {% if user %}
                 <li><a href="/saved_recipes">RECIPES</a></li>
+                {% else %}
+                <li><a href="#" onclick="alert('Please sign in to view saved recipes')">RECIPES</a></li>
+                {% endif %}
                 <li><a href="# ">SHOPPING LIST</a></li>
             </ul>
         </nav>

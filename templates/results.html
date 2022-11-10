@@ -9,10 +9,9 @@
             <input class="search-input" type="text" placeholder="Search recipes" name="search">
             <input class="submit search-button" type="submit" value="Search">
         </form>
-
-        <h2>Showing results for '{{ search }}'</h2>
-        <div class="results_container" id="results_container"></div>
     </div>
+    <h2>Showing results for '{{ search }}'</h2>
+    <div class="results_container" id="results_container"></div>
 </main>
 {% endblock %}
 
@@ -26,22 +25,28 @@
 
     let results_container = document.getElementById('results_container')
         for (result in search_results) {
+            let link = document.createElement('a')
+            link.setAttribute('method', 'POST')
+            let recipe_id = search_results[result]['id']
+            link.setAttribute('href', `/recipe/${recipe_id}`)
+            link.setAttribute('value', recipe_id)
+            results_container.appendChild(link)
+
+
             let result_container = document.createElement('div')
             result_container.className = 'result_container'
-            results_container.appendChild(result_container)
+            link.appendChild(result_container)
 
-            let thumbnail = document.createElement('img')
-            thumbnail.className = 'thumbnail'
-            thumbnail.setAttribute('src', `${search_results[result]['image']}`)
-            result_container.appendChild(thumbnail)
+            
 
-            let recipe = document.createElement('a')
+            let result_tn = document.createElement('img')
+            result_tn.className = 'result_tn'
+            result_tn.setAttribute('src', `${search_results[result]['image']}`)
+            result_container.appendChild(result_tn)
+
+            let recipe = document.createElement('p')
             let title = search_results[result]['title']
             recipe.innerText = title
-            recipe.setAttribute('method', 'POST')
-            let recipe_id = search_results[result]['id']
-            recipe.setAttribute('href', `/recipe/${recipe_id}`)
-            recipe.setAttribute('value', recipe_id)
             result_container.appendChild(recipe)
         }
 </script>

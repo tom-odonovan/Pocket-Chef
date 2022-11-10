@@ -13,25 +13,43 @@
     
     <div class="recipe_container">
         <img src="{{ recipe_dict['image'] }}">
+
         <h1 class="title">{{ recipe_dict['title'] }}</h1>
+
         <p class="prepTime"><strong>PREP </strong>{{ recipe_dict['prepTime'] }} mins</p>
+
         <p id="summary"></p>
+
+        <div class="diets">
         {% for diet in recipe_dict['diets'] %}
-        <div class="diets">{{ diet }}</div>
+            {% if 'gluten free' in diet %}
+            <div>GF</div>
+            {% endif %}
+            {% if 'dairy free' in diet %}
+            <div>DF</div>
+            {% endif %}
+            {% if 'vegan' in diet %}
+            <div>V</div>
+            {% endif %}
         {% endfor %}
+        </div>
+
         <div class="servings">
             <strong>Serves </strong>
-            <input id="servings" type="number" min="1">
+            <input id="slider" type="range" min="1" max="24">
+            <p id="serving_value">{{ recipe_dict['servings'] }}</p>
         </div>
+
         <div id="ingredients_cont">
-            <h3>INGREDIENTS</h3>
-            
+            <h4>INGREDIENTS</h4>
         </div>
+
         <div id="method_cont">
-            <h3>METHOD</h3>
+            <h4>METHOD</h4>
         </div>
+
         <form method="POST" action="/add_favourite/{{ recipe_dict['id'] }}">
-            <button id="fav_button">Add to favourites ♥</button>
+            <button id="fav_button" onclick="alert('Recipe saved to Favourites!')">Add to favourites ♥</button>
         </form>
             
         <button id="sl_button">Add to shopping list</button>
@@ -56,13 +74,15 @@
     let summary = document.getElementById('summary')
     summary.innerText = summaryText
 
-    let servings_toggle = document.getElementById('servings')
+    let slider = document.getElementById('slider')
+    let serving_value = document.getElementById('serving_value')
     let servings = recipe_dict['servings']
-    servings_toggle.setAttribute('value', servings)
-    servings_toggle.onchange = function () {
-        multuplier = servings_toggle.value / servings
-        servings = servings_toggle.value
+    slider.setAttribute('value', servings)
+    slider.onchange = function () {
+        multuplier = slider.value / servings
         console.log(multuplier)
+        servings = slider.value
+        serving_value.innerText = slider.value
         let amounts = document.getElementsByClassName('quantity')
         for (value in amounts) {
             // console.log(amounts[value])
@@ -81,7 +101,13 @@
         let quantity = document.createElement('span')
         quantity.className = 'quantity'
         let value = (ingredients[item]['measures']['metric']['amount']) * multuplier
-        quantity.innerText = parseInt(value)
+        // If quantity value is < 1, display is float rounded to 2 dec places
+        // quantity value must not = 0 
+        if (value < 1) {
+            quantity.innerText = value.toFixed(2)
+        } else {
+            quantity.innerText = parseInt(value)
+        }
         ingredient.appendChild(quantity)
 
         let unit = document.createElement('span')

@@ -40,7 +40,7 @@
             recipe.innerText = title
             recipe.setAttribute('method', 'POST')
             let recipe_id = search_results[result]['id']
-            recipe.setAttribute('href', `/recipe?id=${recipe_id}`)
+            recipe.setAttribute('href', `/recipe/${recipe_id}`)
             recipe.setAttribute('value', recipe_id)
             result_container.appendChild(recipe)
         }

@@ -30,8 +30,11 @@
         <div id="method_cont">
             <h3>METHOD</h3>
         </div>
-        <button>Add to favourites ♥</button>
-        <button>Add to shopping list</button>
+        <form method="POST" action="/add_favourite/{{ recipe_dict['id'] }}">
+            <button id="fav_button">Add to favourites ♥</button>
+        </form>
+            
+        <button id="sl_button">Add to shopping list</button>
     </div>
 
 </main>
@@ -57,11 +60,12 @@
     let servings = recipe_dict['servings']
     servings_toggle.setAttribute('value', servings)
     servings_toggle.onchange = function () {
-        multuplier = servings_toggle.value / recipe_dict['servings']
+        multuplier = servings_toggle.value / servings
+        servings = servings_toggle.value
         console.log(multuplier)
         let amounts = document.getElementsByClassName('quantity')
         for (value in amounts) {
-            console.log(amounts[value])
+            // console.log(amounts[value])
             amounts[value].innerHTML = parseInt(amounts[value].innerHTML * multuplier)
         }
     }
@@ -91,14 +95,15 @@
         ingredient.appendChild(name)
     }
     
-    
-
-    
-
     let method_cont = document.getElementById('method_cont')
     let steps = document.createElement('div')
     steps.innerHTML = recipe_dict['steps']
     method_cont.appendChild(steps)
+
+    // let fav_button = document.getElementById('fav_button')
+    // fav_button.addEventListener('click', function() {
+
+    // })
 
    
 </script>
@@ -112,7 +117,7 @@ quant       =  {{ item['measures']['metric']['amount'] }}
 units       =  {{ item['measures']['metric']['unitLong'] }}
 ingredient  =  {{ item['originalName'] }}
 
-value = value x ( new toggle value / previous toggle value )
+quant value = quant value x ( new toggle value / previous toggle value )
 
 How can I get the previous toggle value ??
 

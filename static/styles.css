@@ -237,6 +237,9 @@ form select {
 
 /* ----------------------// RECIPE //-------------------- */
 
+.recipe_container{
+    margin-bottom: 200px;
+}
 .recipe_container img {
     width: 600px;
 }

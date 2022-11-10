@@ -4,6 +4,7 @@
 {% block content %}
 <main class="favourite_recipes">
     <h1>Favourite Recipes</h1>
+    {% if user %}
     <div class="flex_cont">
         {% for recipe in fav_recipes %}
         <a class="saved_recipe_cont" method="POST" href="/recipe/{{ recipe['id'] }}">
@@ -24,14 +25,20 @@
         </a>
         {% endfor %}
     </div>
+    {% else %}
+    <p>Create an account or login to save favourite recipes</p>
+    {% endif %}
+
 </main>
 {% endblock %}
 
 {% block script %}
 {{ super() }}
 <script>
+    
 let fav_recipes = '{{ fav_recipes | tojson }}'
 fav_recipes = JSON.parse(fav_recipes)
 console.log(fav_recipes)
+
 </script>
 {% endblock %}

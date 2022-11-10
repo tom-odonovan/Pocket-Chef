@@ -163,30 +163,38 @@ def add_favourite(recipe_id):
 @app.route('/saved_recipes')
 def favourite_recipes():
     session_id = session.get('user_id', 'Unknown')
-    user_id = sql_select_one('SELECT id FROM users WHERE given_name=%s', [session_id])
-    print(user_id[0])
-    result = sql_select_all('SELECT recipe_id FROM favourites WHERE user_id=%s', [user_id[0]])
-    fav_recipes_ids = []
-    for recipe in result:
-        fav_recipes_ids.append(recipe)
-    print(fav_recipes_ids)
-    fav_recipes = []
-    for id in fav_recipes_ids:
-        response = requests.get(
-            f"https://api.spoonacular.com/recipes/{id[0]}/information?apiKey=55b5b8694b354c009c8b2c8939e1683b"
-        )
-        data = response.json()
-        recipe_dict = {
-            'id': data['id'],
-            'title': data['title'],
-            'image': data['image'],
-            'prepTime': data['readyInMinutes'],
-            'diets': data['diets']
-        }
-        fav_recipes.append(recipe_dict)
-        print(fav_recipes)
 
-    return render_template('saved_recipes.html', user=session_id, fav_recipes=fav_recipes)
+    if session_id:
+        user_id = sql_select_one('SELECT id FROM users WHERE given_name=%s', [session_id])
+        print(user_id[0])
+        result = sql_select_all('SELECT recipe_id FROM favourites WHERE user_id=%s', [user_id[0]])
+        fav_recipes_ids = []
+        for recipe in result:
+            fav_recipes_ids.append(recipe)
+        print(fav_recipes_ids)
+        fav_recipes = []
+        for id in fav_recipes_ids:
+            response = requests.get(
+                f"https://api.spoonacular.com/recipes/{id[0]}/information?apiKey=55b5b8694b354c009c8b2c8939e1683b"
+            )
+            data = response.json()
+            recipe_dict = {
+                'id': data['id'],
+                'title': data['title'],
+                'image': data['image'],
+                'prepTime': data['readyInMinutes'],
+                'diets': data['diets']
+            }
+            fav_recipes.append(recipe_dict)
+            print(fav_recipes)
+        
+        return render_template('saved_recipes.html', user=session_id, fav_recipes=fav_recipes)
+
+    else: 
+        return render_template('saved_recipes_guest.html', user=session_id)
+
+
+    
 
 
 # Run the server

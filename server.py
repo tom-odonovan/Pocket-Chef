@@ -166,13 +166,13 @@ def favourite_recipes():
 
     if session_id:
         user_id = sql_select_one('SELECT id FROM users WHERE given_name=%s', [session_id])
-        print(user_id[0])
         result = sql_select_all('SELECT recipe_id FROM favourites WHERE user_id=%s', [user_id[0]])
         fav_recipes_ids = []
         for recipe in result:
             fav_recipes_ids.append(recipe)
-        print(fav_recipes_ids)
+
         fav_recipes = []
+
         for id in fav_recipes_ids:
             response = requests.get(
                 f"https://api.spoonacular.com/recipes/{id[0]}/information?apiKey=55b5b8694b354c009c8b2c8939e1683b"
@@ -186,7 +186,6 @@ def favourite_recipes():
                 'diets': data['diets']
             }
             fav_recipes.append(recipe_dict)
-            print(fav_recipes)
         
         return render_template('saved_recipes.html', user=session_id, fav_recipes=fav_recipes)
 
@@ -194,8 +193,25 @@ def favourite_recipes():
         return render_template('saved_recipes_guest.html', user=session_id)
 
 
+@app.route('/user_profile')
+def user_profile():
+    session_id = session.get('user_id', 'Unknown')
+    user_id = sql_select_one('SELECT id FROM users WHERE given_name=%s', [session_id])
+    result = sql_select_all('SELECT given_name, surname, email FROM users WHERE id=%s', [user_id[0]])
     
+    user_info = []
+    for item in result:
+        user_info.append(item)
+    print(user_info)
 
+    return render_template('user_profile.html', user=session_id, user_info=user_info)
+
+
+@app.route('/planner')
+def planner():
+    session_id = session.get('user_id', 'Unknown')
+
+    return render_template('planner.html', user=session_id)
 
 # Run the server
 if __name__ == '__main__':

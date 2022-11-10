@@ -3,15 +3,11 @@
 
 {% block content %}
 <main class="results">
-    <div class="search-container">
-        <form class="search-bar" method="POST" action="/results">
-            <input class="search-input" type="text" placeholder="Search recipes" name="search">
-            <input class="submit search-button" type="submit" value="Search">
-        </form>
-        <div class="no_result">
-            <h2>No results for '{{ search }}'</h2>
-            <p>Change your search and try again.</p>
-        </div>
+    
+    <div class="no_result">
+        <h2>No results for '{{ search }}'</h2>
+        <p>Change your search and try again.</p>
     </div>
+
 </main>
 {% endblock %}

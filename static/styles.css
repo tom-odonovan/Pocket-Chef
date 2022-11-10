@@ -29,32 +29,143 @@ h2 {
 }
 
 
-/* ---------------------// HEADER //-------------------- */
+
+/* -------------------------// HEADER //------------------------ */
 
 .page-header {
     background-color: rgba(39, 41, 62, 0.95);
     color: white;
-    padding: 30px;
+    padding: 0;
 }
-
 .page-header h1 {
-    /* font-family: 'Bree Serif', serif; */
-    font-size: 45px;
     text-align: center;
-    margin-bottom: 30px;
+    display: block;
+    font-size: 45px;
+    margin: 0;
+    padding: 20px 0 5px 0;
     color: white;
 }
 
+/* ----------// SEARCH BAR //---------- */
+
+.search-container {
+    display: inline-block;
+    
+}
+
+.search-container .search-bar {
+    margin: 0 auto;
+    padding-left: 90px;
+    width: fit-content;
+    height: fit-content;
+    display: inline-block;
+    position: relative;
+    left: 45vw;
+    top: -10px;
+    transform: translateX(-50%);   
+}
+
+.search-container .search-input {
+    display: inline-block;
+    padding: 15px 40px 15px 40px;
+    padding-right: 200px;
+    border-radius: 30px;
+    color: #777;
+
+    background-image: url("/static/imgs/search-bar-icon.png");
+    background-color: rgba(255, 255, 255, 0.8);
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: center left 10px;
+}
+
+.search-input::placeholder {
+    color: #777;
+}
+
+.search-container .search-button {
+    color: #777;
+    border: none;
+    display: inline-block;
+    position: relative;
+    left: -90px;
+    cursor: pointer;
+}
+
+/* ----------// NAV BAR //---------- */
+
+.nav_cont {
+    display: inline;
+    position: relative;
+    top: 44px;
+    left: 5px;
+}
+.navbar {
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0);
+    display: inline-block;
+}
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.dropdown .icon {
+    background-image: url('/static/imgs/menu-icon.png');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 50px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 15px;
+    background-color: inherit;
+}
+
+.navbar a:hover,
+.dropdown:hover .icon {
+    background-color: #dc5375;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 350px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 20px 30px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: rgba(230, 230, 230, 0.3);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* ----------// USER SETTINGS //---------- */
+
 .user_id_container {
     position: absolute;
-    top: 150px;
-    right: 5%;
+    top: 100px;
+    right: 3%;
 }
 
 #user_settings {
     text-align: right;
-    position: relative;
-    top: -30px;
     width: fit-content;
     padding: 10px;
     border: none;
@@ -65,42 +176,6 @@ h2 {
     background-position: center left 15px;
 
 }
-/* #user_settings:before {
-    content: url('/staic/imgs/profile_icon.png');
-    width: 40px;
-    z-index: 10;
-    background: url('/staic/imgs/profile_icon.png');
-    position:absolute;
-    top:0px;
-    left:0px;
-} */
-
-.page-header nav {
-    display: inline;
-    margin: 0 auto;
-}
-
-.page-header ul {
-    padding: 0;
-    text-align: center;
-}
-
-.page-header li {
-    display: inline;
-    list-style: none;
-    padding: 20px;
-}
-
-.page-header li:hover {
-    background-color: rgba(211, 211, 211, 0.1);
-}
-
-.page-header a {
-    text-decoration: none;
-    color: white;
-}
-
-
 
 /* ----------------------// USER LOGIN / SIGNUP //-------------------- */
 
@@ -204,42 +279,16 @@ form select {
 
 /* ----------------------// HOME //-------------------- */
 
-.search-container {
-    display: block;
-}
-.search-container .search-bar {
-    margin: 0 auto;
-    padding-left: 90px;
-    width: fit-content;
+#cover {
+    height: 400px;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    background-size: cover;
+    background-position: center;
+
 }
 
-.search-container .search-input {
-    display: inline-block;
-    padding: 15px 40px 15px 40px;
-    padding-right: 200px;
-    border-radius: 30px;
-    border: 1px solid black;
-    color: #777;
-
-    background-image: url("/static/imgs/search-bar-icon.png");
-    background-color: rgba(255, 255, 255, 0.7);
-    background-size: 20px;
-    background-repeat: no-repeat;
-    background-position: center left 10px;
-}
-
-.search-input::placeholder {
-    color: #777;
-}
-
-.search-container .search-button {
-    color: #777;
-    border: none;
-    display: inline-block;
-    position: relative;
-    left: -90px;
-    cursor: pointer;
-}
 
 
 /* ----------------------// RESULTS //-------------------- */
@@ -249,11 +298,11 @@ form select {
 }
 .no_result {
     text-align: center;
-    margin: 0 auto;
+    margin: 100px auto;
 }
 .result_container {
     width: 600px;
-    height: 200px;
+    height: 150px;
     border-radius: 5px;
     overflow: hidden;
     padding: 0;
@@ -267,7 +316,7 @@ form select {
 .result_container p {
     display: inline;
     position: relative;
-    top: -160px;
+    top: -110px;
     left: 20px;
     color: #777;
     font-weight: bold;
@@ -283,6 +332,7 @@ form select {
 }
 .recipe_container img {
     width: 100%;
+    margin-top: 50px;
 
 }
 .recipe_container h1 {
@@ -310,8 +360,12 @@ form select {
     display: inline-block;
     font-size: 18px;
 }
+.method_flex {
+    display: flex;
+}
 #ingredients_cont{
-    width: 350px;
+    width: 320px;
+    display: inline-block;
 }
 #ingredients_cont h4 {
     background-color: rgba(240, 240, 240, 0.7);
@@ -332,8 +386,12 @@ form select {
 .ingredient .quantity {
     font-weight: bold;
 }
+#method_cont {
+    width: 370px;
+    display: inline-block;
+}
 .steps ol>li {
-    padding: 10px 30px;
+    padding: 10px 0 10px 30px;
     list-style-type: style type;
 }
 
@@ -354,7 +412,7 @@ form select {
     line-height: 27px;
     text-align: center;
     color: #fff;
-    background-color: #e76182;
+    background-color: #e56081d6;
     border-radius: 50%;
     content: '';
     z-index: -5;
@@ -399,6 +457,7 @@ form select {
 }
 .diets div {
     display: inline-block;
+    
     width: 24px;
     height: 24px;
     border-radius: 50%;
@@ -408,4 +467,30 @@ form select {
     text-align: center;
     line-height: 24px;
     
+}
+
+/* ----------------------// PLANNER //-------------------- */
+
+.planner {
+    margin: 50px auto;
+}
+.row, .days {
+    display: flex;
+    justify-content: center;
+}
+.day {
+    width: 150px;
+    height: 30px;
+    border: 3px solid lightgrey;
+    background-color: rgb(54, 54, 54);
+    color: white;
+    text-align: center;
+    line-height: 30px;
+}
+.meal {
+    width: 150px;
+    height: 120px;
+    border: 3px solid lightgrey;
+    text-align: center;
+    line-height: 70px;
 }

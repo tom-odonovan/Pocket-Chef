@@ -41,10 +41,9 @@ Project 2 for General Assembly SEI
 - Display favourite recipes in favourites page ✅
 - Allow users to delete saved recipes 
 
-### Allow users to add dietary preferences to their profile
+### Allow users to schedule meals
 
-- 
-
-### Randommly shedule meals for each user based on their preferences
-
-- Users should be able to swap scheduled meals for alternate recipes if they desire
+- Create a new table for each user containing meal schedule
+- Display meal schedule in a calendar fromat
+- Allow users to edit schedule:
+    - Users should be able to swap scheduled meals for alternate recipes if they desire

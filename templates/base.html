@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %} - Meal Planner</title>
+    <title>{% block title %}{% endblock %} - Pocket Chef</title>
     <link rel="stylesheet" href="/static/styles.css">
     {% endblock %}
 </head>
@@ -20,6 +20,7 @@
             <div>
                 <select id="user_settings">
                     <option value="" selected disabled>{{ user }}</option>
+                    <option value="/user_profile">Profile</option>
                     <option value="/login">Switch User</option>
                     <option value="/logout">Logout</option>
                 </select>
@@ -30,25 +31,43 @@
         </div>
         {% endblock %}
 
-        <h1>Meal Planner</h1>
-        <nav class="nav">
-            <ul>
-                <li><a href="/home">HOME</a></li>
-                <li><a href="#">PLANNER</a></li>
-                <li><a href="/saved_recipes">RECIPES</a></li>
-                <li><a href="# ">SHOPPING LIST</a></li>
-            </ul>
-        </nav>
+        <h1>Pocket Chef</h1>
+        <div class="nav_cont">
+            <nav class="navbar">
+                <div class="dropdown">
+                    <button class="icon"></button>
+                    <div class="dropdown-content">
+                        <a href="/home">HOME</a>
+                        <a href="/planner">PLANNER</a>
+                        <a href="/saved_recipes">FAVOURITES</a>
+                        <a href="# ">SHOPPING LIST</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="search-container">
+            <form class="search-bar" method="POST" action="/results">
+                <input class="search-input" type="text" placeholder="Search recipes" name="search">
+                <input class="submit search-button" type="submit" value="Search">
+            </form>
+        </div>
+
     </header>
     {% endblock %}
 
-    {% block content %}{% endblock %}
+    <div class="content_container">
+        {% block content %}{% endblock %}
+    </div>
 
     {% block script %}
     <script>
         const user_settings = document.getElementById('user_settings')
         user_settings.onchange = function () {
-            if (confirm(`Are you sure you want to log out?`)) {
+            if (this.value == '/user_profile') {
+                window.location = this.value;
+            } else if 
+                (confirm(`Are you sure you want to log out?`)) {
                 window.location = this.value;
             }
         }

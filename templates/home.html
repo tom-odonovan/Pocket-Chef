@@ -2,12 +2,16 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<main>
-    <div class="search-container">
-        <form class="search-bar" method="POST" action="/results">
-            <input class="search-input" type="text" placeholder="Search recipes" name="search">
-            <input class="submit search-button" type="submit" value="Search">
-        </form>
-    </div>
-</main>
+<section id="cover"></section>
+
+
+
+{% endblock %}
+
+{% block script %}
+<script>
+    const cover = document.getElementById('cover')
+    rand = Math.ceil(Math.random() * 5)
+    cover.style.backgroundImage = `url(/static/imgs/bg_${rand}.jpeg`
+</script>
 {% endblock %}

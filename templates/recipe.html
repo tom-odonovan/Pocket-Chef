@@ -3,13 +3,6 @@
 
 {% block content %}
 <main class="results">
-
-    <div class="search-container">
-        <form class="search-bar" method="POST" action="/results">
-            <input class="search-input" type="text" placeholder="Search recipes" name="search">
-            <input class="submit search-button" type="submit" value="Search">
-        </form>
-    </div>
     
     <div class="recipe_container">
         <img src="{{ recipe_dict['image'] }}">
@@ -40,12 +33,14 @@
             <p id="serving_value">{{ recipe_dict['servings'] }}</p>
         </div>
 
-        <div id="ingredients_cont">
-            <h4>INGREDIENTS</h4>
-        </div>
+        <div class="method_flex">
+            <div id="ingredients_cont">
+                <h4>INGREDIENTS</h4>
+            </div>
 
-        <div id="method_cont">
-            <h4>METHOD</h4>
+            <div id="method_cont">
+                <h4>METHOD</h4>
+            </div>
         </div>
 
         {% if user %}
@@ -90,6 +85,7 @@
         let amounts = document.getElementsByClassName('quantity')
         for (value in amounts) {
             // console.log(amounts[value])
+            // console.log(parseFloat(amounts[value].innerHTML).toFixed(2))
             amounts[value].innerHTML = parseInt(amounts[value].innerHTML * multuplier)
         }
     }

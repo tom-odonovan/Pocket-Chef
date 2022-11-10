@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS favourites;
 
 CREATE TABLE users(
     id SERIAL PRIMARY KEY,
@@ -8,3 +9,12 @@ CREATE TABLE users(
     password_hash TEXT,
     admin BOOLEAN
 );
+
+CREATE TABLE favourites(
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER,
+    recipe_id INTEGER,
+
+    FOREIGN KEY (user_id)
+        REFERENCES users(id)
+)

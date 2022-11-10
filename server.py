@@ -1,3 +1,4 @@
+from crypt import methods
 from flask import Flask, render_template, request, redirect, make_response, session
 import psycopg2
 from models.queries import sql_select_all, sql_select_one, sql_write
@@ -134,52 +135,46 @@ def results():
 
 
 
-@app.route('/recipe', methods=['POST', 'GET'])
-def recipe():
+@app.route('/recipe/<recipe_id>', methods=['POST', 'GET'])
+def recipe(recipe_id):
     session_id = session.get('user_id', 'Unknown')
-    recipe_id = request.args.get('id')
     response = requests.get(
         f"https://api.spoonacular.com/recipes/{recipe_id}/information?apiKey=55b5b8694b354c009c8b2c8939e1683b"
     )
     data = response.json()
-    
-    
 
     # After much frustration I decided to create my own dictionary for each recipe as the JSON data was experiencing formatting issues
 
-    id = data['id']
-    title = data['title']
-    image = data['image']
-    servings = data['servings']
-    prepTime = data['readyInMinutes']
-    extendedIngredients = data['extendedIngredients']
-    steps = data['instructions']
-    diets = data['diets']
-    summary = data['summary']
-    
-
     recipe_dict = {
-        'id': id,
-        'title': title,
-        'image': image,
-        'servings': servings,
-        'prepTime': prepTime,
-        'ingredients': extendedIngredients,
-        'steps': steps,
-        'diets': diets
+        'id': data['id'],
+        'title': data['title'],
+        'image': data['image'],
+        'servings': data['servings'],
+        'prepTime': data['readyInMinutes'],
+        'ingredients': data['extendedIngredients'],
+        'steps': data['instructions'],
+        'diets': data['diets']
     }
 
-    print(summary)
-
-    # keys = ['id', 'name', 'measures']
-    # values = []
-    # for item in extendedIngredients:
-    #     values.append(item[])
-    #     ingredients.append(item['originalName'])
-    
+    summary = data['summary']
+    # print(summary)
 
     return render_template('recipe.html', user=session_id, recipe_dict=recipe_dict, summary=summary)
 
+@app.route('/add_favourite/<recipe_id>', methods=['POST', 'GET'])
+def add_favourite(recipe_id):
+    session_id = session.get('user_id', 'Unknown')
+    user_id = sql_select_one('SELECT id FROM users WHERE given_name=%s', [session_id])
+
+    sql_write('INSERT INTO favourites (user_id, recipe_id) VALUES (%s, %s)', [user_id, recipe_id])
+
+    return redirect(f'/recipe/{recipe_id}')
+
+@app.route('/favourite_recipes')
+def favourite_recipes():
+    session_id = session.get('user_id', 'Unknown')
+
+    return render_template('home.html', user=session_id)
 
 
 # Run the server

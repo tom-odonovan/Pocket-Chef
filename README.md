@@ -32,3 +32,10 @@ Project 2 for General Assembly SEI
 - Create a new route to display recipe info ✅
 - When the user clicks a search result, they should be directed to the recipe page ✅
 - Render recipe info in HTML ✅
+- Allow users to alter ingredient quantities by adjusting servings ✅
+
+### Allow Users to Save Favourite Recipes
+
+- Create a new table for saved recipes ✅
+- Allow logged in users to add favourite recipes to database ✅
+- Display favourite recipes in favourites page

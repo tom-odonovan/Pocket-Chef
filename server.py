@@ -226,6 +226,19 @@ def planner():
 
     return render_template('planner.html', user=session_id, today=today)
 
+
+@app.route('/shopping_list')
+def shopping_list():
+    session_id = session.get('user_id', 'Unknown')
+    
+    return render_template('shopping_list.html', user=session_id)
+    
+@app.route('/add_to_shopping_list')
+def add_to_shopping_list():
+    session_id = session.get('user_id', 'Unknown')
+    
+    return render_template('shopping_list.html', user=session_id)
+
 # Run the server
 if __name__ == '__main__':
     app.run(debug=True)

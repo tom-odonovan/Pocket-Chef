@@ -2,7 +2,7 @@
 {% block title %}Recipe{% endblock %}
 
 {% block content %}
-<main class="results">
+<main class="recipe">
     
     <div class="recipe_container">
         <img src="{{ recipe_dict['image'] }}">
@@ -44,14 +44,19 @@
         </div>
 
         {% if user %}
-        <form method="POST" action="/add_favourite/{{ recipe_dict['id'] }}">
-            <button id="fav_button" onclick="alert('Recipe saved to Favourites!')">Add to favourites ♥</button>
-        </form>
+        <!-- <form class="recipe_buttons" method="POST" action="/add_favourite/{{ recipe_dict['id'] }}">
+            <button id="fav_button">Add to favourites ♥</button>
+            <button id="sl_button">Add to shopping list</button>
+        </form> -->
+        <div class="recipe_buttons">
+            <a href="/add_favourite/{{ recipe_dict['id'] }}" id="fav_button">Add to favourites ♥</a>
+            <a href="#" id="sl_button">Add to shopping list</a>
+        </div>
+
         {% else %}
         <button id="fav_button" onclick="alert('Please sign in to save recipes.')">Add to favourites ♥</button>
+        <button id="sl_button" onclick="alert('Please sign in to save recipes.')">Add to shopping list</button>
         {% endif %}
-            
-        <button id="sl_button">Add to shopping list</button>
     </div>
 
 </main>
@@ -119,6 +124,8 @@
         name.className = 'name'
         name.innerText = ingredients[item]['originalName']
         ingredient.appendChild(name)
+
+        console.log(ingredient.innerText)
     }
     
     let method_cont = document.getElementById('method_cont')
@@ -127,10 +134,16 @@
     steps.innerHTML = recipe_dict['steps']
     method_cont.appendChild(steps)
 
-    // let fav_button = document.getElementById('fav_button')
-    // fav_button.addEventListener('click', function() {
+    let fav_button = document.getElementById('fav_button')
+    fav_button.addEventListener('click', () => {
+        alert('Recipe saved to Favourites!')
+    }) 
+    let sl_button = document.getElementById('sl_button')
+    sl_button.addEventListener('click', () => {
+        alert('Ingredients added to shopping list')
+    }) 
 
-    // })
+    
 
    
 </script>

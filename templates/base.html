@@ -31,7 +31,7 @@
         </div>
         {% endblock %}
 
-        <h1>Pocket Chef</h1>
+        {% block page_heading %}<h1>Pocket Chef</h1>{% endblock %}
         <div class="nav_cont">
             <nav class="navbar">
                 <div class="dropdown">
@@ -40,18 +40,19 @@
                         <a href="/home">HOME</a>
                         <a href="/planner">PLANNER</a>
                         <a href="/saved_recipes">FAVOURITES</a>
-                        <a href="# ">SHOPPING LIST</a>
+                        <a href="/shopping_list">SHOPPING LIST</a>
                     </div>
                 </div>
             </nav>
         </div>
-
+        {% block search_bar %}
         <div class="search-container">
             <form class="search-bar" method="POST" action="/results">
-                <input class="search-input" type="text" placeholder="Search recipes" name="search">
+                <input class="search-input" type="text" placeholder="Search recipes . . ." name="search">
                 <input class="submit search-button" type="submit" value="Search">
             </form>
         </div>
+        {% endblock %}
 
     </header>
     {% endblock %}

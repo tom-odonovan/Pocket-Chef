@@ -18,3 +18,13 @@ CREATE TABLE favourites(
     FOREIGN KEY (user_id)
         REFERENCES users(id)
 )
+
+CREATE TABLE shopping_list(
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER,
+    quantity INTEGER,
+    ingredient INTEGER,
+
+    FOREIGN KEY (user_id)
+        REFERENCES users(id)
+)

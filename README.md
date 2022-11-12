@@ -47,3 +47,10 @@ Project 2 for General Assembly SEI
 - Display meal schedule in a calendar format
 - Allow users to edit schedule:
     - Users should be able to swap scheduled meals for alternate recipes if they desire
+
+
+### Allow users to add ingredients to shopping list
+
+- Create a new table for shoping list
+- Display shopping list in HTML
+- Caluclate approximate price based on quantities

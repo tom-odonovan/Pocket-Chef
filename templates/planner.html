@@ -6,13 +6,13 @@
 <main class="planner">
     <div id="calendar">
         <div class="days">
-            <div class="day">Sun</div>
-            <div class="day">Mon</div>
-            <div class="day">Tue</div>
-            <div class="day">Wed</div>
-            <div class="day">Thur</div>
-            <div class="day">Fri</div>
-            <div class="day">Sat</div>
+            <div class="day">MON</div>
+            <div class="day">TUE</div>
+            <div class="day">WED</div>
+            <div class="day">THU</div>
+            <div class="day">FRI</div>
+            <div class="day">SAT</div>
+            <div class="day">SUN</div>
         </div>
         <div class="row" id="row-2">
             <div class="meal"></div>
@@ -52,4 +52,29 @@
         </div>
 </main>
 
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script>
+    date = '{{ today }}'
+    console.log(`Today's date = ${date}`)
+
+    let curr = new Date 
+    let thisWeek = []
+
+    for (let i = 1; i <= 7; i++) {
+        let first = curr.getDate() - curr.getDay() + i 
+        let date = new Date(curr.setDate(first)).toISOString().slice(0, 10)
+        let dayDate = parseInt(date.slice(-2))
+        thisWeek.push(dayDate)
+    } 
+    console.log(`This week days = ${thisWeek}`)
+
+    for (day in thisWeek) {
+        let date = document.getElementsByClassName('day')[day]
+        date.innerHTML = date.innerHTML + ' ' + thisWeek[day]
+    }
+    
+</script>
 {% endblock %}

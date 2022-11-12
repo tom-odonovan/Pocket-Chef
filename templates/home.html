@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 {% block title %}Home{% endblock %}
 
+{% block header %}
+    {{ super() }}
+    {% block search_bar %}{% endblock %}
+{% endblock %}
+
 {% block content %}
-<section id="cover"></section>
-
-
-
+<section id="cover">
+    <h1>Cooking Made Simple</h1>
+</section>
 {% endblock %}
 
 {% block script %}

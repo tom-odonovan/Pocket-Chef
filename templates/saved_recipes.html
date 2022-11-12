@@ -9,6 +9,7 @@
         {% for recipe in fav_recipes %}
         <a class="saved_recipe_cont" method="POST" href="/recipe/{{ recipe['id'] }}">
             <img src="{{ recipe['image'] }}">
+            <button id="delete_button" class="delete_button">X</button>
             <h4>{{ recipe['title'] }}</h4>
             <p>{{ recipe['prepTime'] }} MIN</p>
             <div class="diets">
@@ -39,6 +40,11 @@
 let fav_recipes = '{{ fav_recipes | tojson }}'
 fav_recipes = JSON.parse(fav_recipes)
 console.log(fav_recipes)
+
+let delete_button = document.getElementById('delete_button')
+delete_button.addEventListener('click', () => {
+    window.location.href = '/home';
+})
 
 </script>
 {% endblock %}

@@ -39,11 +39,11 @@ Project 2 for General Assembly SEI
 - Create a new table for saved recipes ✅
 - Allow logged in users to add favourite recipes to database ✅
 - Display favourite recipes in favourites page ✅
-- Allow users to delete saved recipes 
+- Allow users to delete saved recipes ✅
 
 ### Allow users to schedule meals
 
 - Create a new table for each user containing meal schedule
-- Display meal schedule in a calendar fromat
+- Display meal schedule in a calendar format
 - Allow users to edit schedule:
     - Users should be able to swap scheduled meals for alternate recipes if they desire

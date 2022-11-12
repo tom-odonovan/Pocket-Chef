@@ -4,6 +4,7 @@ import psycopg2
 from models.queries import sql_select_all, sql_select_one, sql_write
 import bcrypt
 import requests
+from datetime import date
 
 
 app = Flask(__name__)
@@ -193,6 +194,16 @@ def favourite_recipes():
         return render_template('saved_recipes_guest.html', user=session_id)
 
 
+@app.route('/delete_favourite/<recipe_id>')
+def delete_favourite(recipe_id):
+    session_id = session.get('user_id', 'Unknown')
+    user_id = sql_select_one('SELECT id FROM users WHERE given_name=%s', [session_id])
+
+    sql_write('DELETE FROM favourites WHERE user_id=%s AND recipe_id=%s', [user_id, recipe_id])
+
+    return redirect('/saved_recipes')
+
+
 @app.route('/user_profile')
 def user_profile():
     session_id = session.get('user_id', 'Unknown')
@@ -210,8 +221,10 @@ def user_profile():
 @app.route('/planner')
 def planner():
     session_id = session.get('user_id', 'Unknown')
+    today = date.today()
+    print(today.day)
 
-    return render_template('planner.html', user=session_id)
+    return render_template('planner.html', user=session_id, today=today)
 
 # Run the server
 if __name__ == '__main__':

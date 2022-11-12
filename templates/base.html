@@ -37,10 +37,20 @@
                 <div class="dropdown">
                     <button class="icon"></button>
                     <div class="dropdown-content">
+                        {% if user %}
                         <a href="/home">HOME</a>
                         <a href="/planner">PLANNER</a>
                         <a href="/saved_recipes">FAVOURITES</a>
                         <a href="/shopping_list">SHOPPING LIST</a>
+                        <a href="/login">SWITCH USER</a>
+                        <a href="/logout">LOGOUT</a>
+                        {% else %}
+                        <a href="/home">HOME</a>
+                        <a href="#">PLANNER</a>
+                        <a href="#">FAVOURITES</a>
+                        <a href="#">SHOPPING LIST</a>
+                        {% endif %}
+
                     </div>
                 </div>
             </nav>
@@ -65,6 +75,7 @@
     <script>
         const user_settings = document.getElementById('user_settings')
         user_settings.onchange = function () {
+            console.log('test')
             if (this.value == '/user_profile') {
                 window.location = this.value;
             } else if 

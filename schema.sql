@@ -17,7 +17,7 @@ CREATE TABLE favourites(
 
     FOREIGN KEY (user_id)
         REFERENCES users(id)
-)
+);
 
 CREATE TABLE shopping_list(
     id SERIAL PRIMARY KEY,

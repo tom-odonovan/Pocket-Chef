@@ -50,6 +50,12 @@ h2 {
     position: relative;
     top: 25px;
 }
+.login-out {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    top: 35px;
+}
 
 /* ----------// SEARCH BAR //---------- */
 

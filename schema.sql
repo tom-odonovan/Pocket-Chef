@@ -1,5 +1,7 @@
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS favourites;
+DROP TABLE IF EXISTS shopping_list;
+
 
 CREATE TABLE users(
     id SERIAL PRIMARY KEY,
@@ -22,9 +24,10 @@ CREATE TABLE favourites(
 CREATE TABLE shopping_list(
     id SERIAL PRIMARY KEY,
     user_id INTEGER,
-    quantity INTEGER,
+    quantity FLOAT,
+    measure TEXT,
     ingredient INTEGER,
 
     FOREIGN KEY (user_id)
         REFERENCES users(id)
-)
+);

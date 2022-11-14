@@ -1,6 +1,8 @@
-# Meal Planner (Name TBD)
+# Pocket Chef
 
 Project 2 for General Assembly SEI
+
+Demo here ------> https://meal-planner-v1.herokuapp.com/
 
 ## Work plan
 

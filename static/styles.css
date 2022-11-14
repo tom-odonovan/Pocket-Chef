@@ -311,6 +311,18 @@ form select {
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 
+.home .search-container{
+    margin-left: 80px;
+}
+.home .search-input{
+    color: #777;
+    border: 1px solid #777;
+}
+.home p {
+    text-align: center;
+    color: grey;
+    opacity: 0.5;
+}
 
 
 

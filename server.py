@@ -111,8 +111,34 @@ def results():
     response = requests.get(
         f"https://api.spoonacular.com/recipes/complexSearch?query={search}&apiKey=55b5b8694b354c009c8b2c8939e1683b"
     ) 
-
     data = response.json()
+
+
+
+    # result_recipes_ids = []
+    # for recipe in response:
+    #     result_recipes_ids.append(recipe['id'])
+
+    # print(result_recipes_ids)
+
+    # recipes = []
+
+    # for id in result_recipes_ids:
+    #     response = requests.get(
+    #         f"https://api.spoonacular.com/recipes/{id[0]}/information?apiKey=55b5b8694b354c009c8b2c8939e1683b"
+    #     )
+    #     data = response.json()
+    #     recipe_dict = {
+    #         'id': data['id'],
+    #         'title': data['title'],
+    #         'image': data['image'],
+    #         'prepTime': data['readyInMinutes'],
+    #         'diets': data['diets']
+    #     }
+    #     fav_recipes.append(recipe_dict)
+
+
+
 
     if data['totalResults'] == 0:
         return render_template('no_results.html', user=session_id, search=search)

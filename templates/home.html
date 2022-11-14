@@ -7,9 +7,19 @@
 {% endblock %}
 
 {% block content %}
-<section id="cover">
-    <h1>Cooking Made Simple</h1>
-</section>
+<main class="home">
+    <section id="cover">
+        <h1>Cooking Made Simple</h1>
+    </section>
+
+    <div class="search-container">
+        <form class="search-bar" method="POST" action="/results">
+            <input class="search-input" type="text" placeholder="Search recipe database . . ." name="search">
+            <input class="submit search-button" type="submit" value="Search">
+        </form>
+    </div>
+
+</main>
 {% endblock %}
 
 {% block script %}

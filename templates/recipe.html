@@ -95,7 +95,7 @@
         }
     }
 
-
+    shoppingList = {}
     let ingredients_cont = document.getElementById('ingredients_cont')
     let ingredients = recipe_dict['ingredients']
     for (let item in ingredients) {
@@ -141,6 +141,7 @@
     let sl_button = document.getElementById('sl_button')
     sl_button.addEventListener('click', () => {
         alert('Ingredients added to shopping list')
+        
     }) 
 
     

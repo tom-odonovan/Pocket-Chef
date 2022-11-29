@@ -2,11 +2,13 @@
 
 Project 2 for General Assembly SEI
 
-Demo here ------> https://meal-planner-v1.herokuapp.com/
-
 ## Description 
 
-Pocket Chef was created primarily as a way to oragnise you weekly meal plan and make it easy to find, share and store your favourite recipes. The goal was to take the hassle and guesswork out of cooking and create an app that has everything you need in one place. Give it a try, and let me know what you think!
+Pocket Chef was created primarily as a way to oragnise your weekly meal plan and make it easy to find, share and store your favourite recipes. The goal was to take the hassle and guesswork out of cooking and create an app that has everything you need in one place. Give it a try, and let me know what you think!
+
+## Demo 
+
+https://meal-planner-v1.herokuapp.com/
 
 ## Project plan
 
@@ -39,6 +41,7 @@ Pocket Chef was created primarily as a way to oragnise you weekly meal plan and 
 
 - Allow users to add ingredients to shopping list
     - Create a new table for shoping list
+    - Allow users to add recipes to shopping list
     - Render shopping list in HTML
     - Caluclate approximate price based on quantities
     - Check off items as they are purchased

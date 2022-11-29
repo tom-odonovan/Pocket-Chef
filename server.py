@@ -256,8 +256,16 @@ def planner():
 @app.route('/shopping_list')
 def shopping_list():
     session_id = session.get('user_id', 'Unknown')
+    user_id = sql_select_one('SELECT id FROM users WHERE given_name=%s', [session_id])
+    result = sql_select_all('SELECT quantity, measure, ingredient FROM shopping_list WHERE user_id=%s', [user_id[0]])
     
-    return render_template('shopping_list.html', user=session_id)
+    shopping_list = []
+    for row in result:
+        quantity, measure, ingredient = row
+        shopping_list.append([quantity, measure, ingredient])
+    print(shopping_list)
+
+    return render_template('shopping_list.html', user=session_id, shopping_list=shopping_list)
     
 @app.route('/add_to_shopping_list')
 def add_to_shopping_list():

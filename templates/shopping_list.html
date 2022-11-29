@@ -6,6 +6,14 @@
 <main class="shopping_list">
     <h1>Shopping List</h1>
     <p>Put list here ...</p>
+
+    {% for quantity, measure, ingredient in shopping_list %}
+
+    <ul>
+        <li>{{ quantity }} {{ measure }} {{ ingredient }}</li>
+    </ul>
+
+    {% endfor %}
 </main>    
 
 {% endblock %}

@@ -17,7 +17,7 @@ Pocket Chef was built using the following technologies:
 - Flask
 - postgreSQL
 - Jinja2
-- spoonacular API
+- [Spoonacular API](https://spoonacular.com/food-api)
 - Postman
 
 ## Installation
@@ -53,18 +53,18 @@ python3 app.py initdb
 python3 app.py
 ```
 
-6. Open your browser and go to http://localhost:5000 to access the app.
+6. Open your browser and go to http://localhost:3000 to access the app.
 
 ## Features
 Pocket Chef offers the following features:
 
-- Login/Signup Functionality: Users can create an account or log in to access the app's features.
-- Recipe Search: Users can search for recipes using the spoonacular API and view a list of search results.
-- Detailed Recipe Information: Users can view detailed information about a recipe, including ingredients, instructions, and nutritional information.
-- Adjustable Ingredient Quantities: Users can adjust the ingredient quantities based on the desired number of servings.
-- Favourite Recipes: Users can save their favourite recipes to a database and view them in the favourites page.
-- Meal Scheduler: Users can schedule their meals by adding recipes to their weekly calendar and view them in a dynamic weekly format.
-- Shopping List: Users can add ingredients from their selected recipes to a shopping list, view it in HTML format, and check off items as they are purchased.
+- **Login/Signup Functionality:** Users can create an account or log in to access the app's features.
+- **Recipe Search:** Users can search for recipes using the spoonacular API and view a list of search results.
+- **Detailed Recipe Information:** Users can view detailed information about a recipe, including ingredients, instructions, and nutritional information.
+- **Adjustable Ingredient Quantities:** Users can adjust the ingredient quantities based on the desired number of servings.
+- **Favourite Recipes:** Users can save their favourite recipes to a database and view them in the favourites page.
+- **Meal Scheduler:** Users can schedule their meals by adding recipes to their weekly calendar and view them in a dynamic weekly format.
+- **Shopping List:** Users can add ingredients from their selected recipes to a shopping list, view it in HTML format, and check off items as they are purchased.
 
 ## Acknowledgements
 Pocket Chef was developed as part of the General Assembly SEI project. Special thanks to my instructors and classmates for their support and feedback throughout the development process.
